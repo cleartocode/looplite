@@ -67,7 +67,8 @@ async def handle(reader, writer):
 
 async def main():
     server = await asyncio.start_server(handle, "127.0.0.1", 8080)
-    print("looplite running at http://127.0.0.1:8080")
+    logging.info("looplite server started")
+    logging.info(f"Listening on {server.sockets[0].getsockname()}")
     async with server:
         await server.serve_forever()
 
