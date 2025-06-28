@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "looplite"
+version = "0.1.0"
+description = "A minimal async HTTP server in pure Python"
+authors = ["Tu Nombre <tu.email@example.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "looplite" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
