@@ -10,11 +10,13 @@ logging.basicConfig(
 
 ROUTES = {}
 
+
 def route(path):
     def decorator(func):
         ROUTES[path] = func
         return func
     return decorator
+
 
 def json_response(status: int, body: dict):
     encoded = json.dumps(body).encode()
@@ -25,9 +27,11 @@ def json_response(status: int, body: dict):
         f"\r\n"
     ).encode() + encoded
 
+
 @route("/")
 async def home():
     return 200, {"message": "Welcome to looplite!"}
+
 
 @route("/status")
 async def status():
@@ -35,6 +39,7 @@ async def status():
         "status": "ok",
         "server_time": datetime.utcnow().isoformat()
     }
+
 
 async def handle(reader, writer):
     try:
@@ -71,6 +76,7 @@ async def main():
     logging.info(f"Listening on {server.sockets[0].getsockname()}")
     async with server:
         await server.serve_forever()
+
 
 if __name__ == "__main__":
     try:
