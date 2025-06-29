@@ -1,6 +1,14 @@
-![loopliteimage](https://github.com/user-attachments/assets/3100f952-913d-4a51-a0fc-45f4044391be)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/3100f952-913d-4a51-a0fc-45f4044391be" width="600" />
+</p>
 
 # looplite
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/beb9fbae-af38-4417-a4a1-f48ef675538a" width="480" />
+  <img src="https://github.com/user-attachments/assets/fbe5c8c3-1d6e-48f5-bce2-691891f49b62" width="480" />
+</p>
+
+
 
 **looplite** is a minimal, asynchronous HTTP server built 100% in pure Python using `asyncio`. It uses no external frameworks and responds in JSON by default.
 
