@@ -47,18 +47,18 @@ def _normalize(method: str, url: str) -> tuple[str, list[str], list[str]]:
     """
     Normalizes and sanitizes the method and url.
     """
-    method = method.upper()  # 'get' to 'GET'
-    path = urlparse(url).path  # 'https://test.com/hello/C%C3%A9sar' to '/hello/C%C3%A9sar'
+    method = method.upper()
+    path = urlparse(url).path
     path_decoded = unquote(path)  # '/hello/C%C3%A9sar' to '/hello/César'
 
     if path_decoded != "/":  # if path_decoded is not root "/"
-        path_decoded = re.sub(r"/+", "/", path_decoded)  # '/hello//César to /hello/César'
+        path_decoded = re.sub(r"/+", "/", path_decoded)
 
-        if path_decoded.endswith("/"):  # remove trailing slash
-            path_decoded = path_decoded[:-1]  # '/hello/César/' to '/hello/César''
+        if path_decoded.endswith("/"):  # if the path has a trailing slash "/" remove it
+            path_decoded = path_decoded[:-1]
 
-    parts_params = [p for p in path_decoded.split("/") if p]  # '/hello/César' to ['hello', 'César']'
-    parts_match = [p.casefold() for p in parts_params]  # ['hello', 'César'] to ['hello', 'césar']
+    parts_params = [p for p in path_decoded.split("/") if p]
+    parts_match = [p.casefold() for p in parts_params]
 
     return method, parts_match, parts_params
 
