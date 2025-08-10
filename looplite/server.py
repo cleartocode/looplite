@@ -1,6 +1,8 @@
+import re
 import logging
 import asyncio
 import json
+from urllib.parse import urlparse, unquote
 from datetime import datetime
 
 logging.basicConfig(
@@ -39,6 +41,26 @@ async def status():
         "status": "ok",
         "server_time": datetime.utcnow().isoformat()
     }
+
+
+def _normalize(method: str, url: str) -> tuple[str, list[str], list[str]]:
+    """
+    Normalizes and sanitizes the method and url.
+    """
+    method = method.upper()  # 'get' to 'GET'
+    path = urlparse(url).path  # 'https://test.com/hello/C%C3%A9sar' to '/hello/C%C3%A9sar'
+    path_decoded = unquote(path)  # '/hello/C%C3%A9sar' to '/hello/César'
+
+    if path_decoded != "/":  # if path_decoded is not root "/"
+        path_decoded = re.sub(r"/+", "/", path_decoded)  # '/hello//César to /hello/César'
+
+        if path_decoded.endswith("/"):  # remove trailing slash
+            path_decoded = path_decoded[:-1]  # '/hello/César/' to '/hello/César''
+
+    parts_params = [p for p in path_decoded.split("/") if p]  # '/hello/César' to ['hello', 'César']'
+    parts_match = [p.casefold() for p in parts_params]  # ['hello', 'César'] to ['hello', 'césar']
+
+    return method, parts_match, parts_params
 
 
 async def handle(reader, writer):
