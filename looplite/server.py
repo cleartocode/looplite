@@ -2,7 +2,6 @@ import re
 import logging
 import asyncio
 import json
-from datetime import datetime
 from urllib.parse import urlparse
 
 logging.basicConfig(

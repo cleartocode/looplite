@@ -12,6 +12,7 @@ python = "^3.10"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
+pytest-asyncio = "*"
 
 [build-system]
 requires = ["poetry-core"]
