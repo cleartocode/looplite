@@ -24,10 +24,14 @@ poetry run python looplite/server.py
 
 The server will be running at `http://127.0.0.1:8080`.
 
-### 🧪 Included Routes
+### 🧪 Included Dummy Routes for live testing
 
-- `/` → welcome message  
-- `/status` → JSON status with timestamp
+- `/` -> welcome message
+- `/getuserinfo?user_id=<id>&username=<username>` -> retrieves a user id and a user name 
+- `/add/<a>/<b>` -> Adds a + b
+- `/submitsomething` -> POST a `data` payload
+- `/status` -> JSON status with timestamp
+- 
 
 ### 📦 Installation
 

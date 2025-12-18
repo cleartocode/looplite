@@ -272,8 +272,8 @@ async def hello():
 
 
 # User info route, uses query parameters
-@app.route("/getinfo", method=["GET"])
-async def get_info(user_id: str, username: str):
+@app.route("/getuserinfo", method=["GET"])
+async def get_user_info(user_id: str, username: str):
     return Response(body={"user_id": user_id, "username": username}, content_type="application/json")
 
 
@@ -285,8 +285,8 @@ async def add(a: int, b: int):
 
 
 # Submit route, uses JSON body
-@app.route("/submit", method=["POST"])
-async def submit(data: dict):
+@app.route("/submitsomething", method=["POST"])
+async def submit_something(data: dict):
     return Response(body={"received": data}, content_type="application/json")
 
 
