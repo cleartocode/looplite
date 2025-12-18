@@ -31,7 +31,6 @@ The server will be running at `http://127.0.0.1:8080`.
 - `/add/<a>/<b>` -> Adds a + b
 - `/submitsomething` -> POST a `data` payload
 - `/status` -> JSON status with timestamp
-- 
 
 ### 📦 Installation
 
