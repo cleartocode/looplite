@@ -201,7 +201,6 @@ class Looplite:
             # 2. Register the route
             for m in method:
                 self.routes.append((m.upper(), compiled_path, func))
-            logging.info(f"Route registered: {path} with methods {method}")
             return func
         return decorator
     
@@ -240,9 +239,10 @@ class Looplite:
                 logging.error(f"Error in handler: {e}")
                 response = Response(
                     status_code=500,
-                    body={"error": "Internal Server Error"}
+                    body={"error": "Internal Server Error", "message": str(e)}
                 )
         else:
+            logging.warning(f"No route found for {request.method} {request.path}")
             response = Response(
                 status_code=404,
                 body={"error": "Not Found"}
@@ -261,6 +261,32 @@ class Looplite:
 
 
 app = Looplite()
+
+
+# Dummy routes for testing
+# Welcome route
+@app.route("/", method=["GET"])
+async def hello():
+    return Response(body={"message": "Welcome to Looplite!"}, content_type="text/plain")
+
+
+# User info route, uses query parameters
+@app.route("/getinfo", method=["GET"])
+async def get_info(user_id: str, username: str):
+    return Response(body={"user_id": user_id, "username": username}, content_type="application/json")
+
+
+# Addition route, uses path parameters
+@app.route("/add/<a>/<b>", method=["GET"])
+async def add(a: int, b: int):
+    result = int(a) + int(b)
+    return Response(body={"result": result}, content_type="application/json")
+
+
+# Submit route, uses JSON body
+@app.route("/submit", method=["POST"])
+async def submit(data: dict):
+    return Response(body={"received": data}, content_type="application/json")
 
 
 if __name__ == "__main__":
