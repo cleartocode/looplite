@@ -2,6 +2,7 @@ import re
 import logging
 import asyncio
 import json
+import datetime
 from typing import Union
 from urllib.parse import urlparse, parse_qs
 from dataclasses import dataclass, field
@@ -287,6 +288,17 @@ async def add(a: int, b: int):
 @app.route("/submit", method=["POST"])
 async def submit(data: dict):
     return Response(body={"received": data}, content_type="application/json")
+
+
+# Status
+@app.route("/status", method=["GET"])
+async def status():
+    return Response(
+        body={
+            "server_time":  datetime.datetime.utcnow().isoformat() + "Z",
+            "status": "OK"
+        }
+    )
 
 
 if __name__ == "__main__":
