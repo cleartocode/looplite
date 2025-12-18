@@ -1,1 +1,11 @@
+config.yml
 .idea
+__pycache__/
+*.pyc
+env/
+venv/
+*.pyo
+*.pyd
+
+.DS_Store
+
